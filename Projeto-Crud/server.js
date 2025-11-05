@@ -20,6 +20,15 @@ app.get('/', (req, res) =>{
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+//linkar com o arquivo API (contém as rotas do nosso sistema)
+const apiRoutes = require('./routes/api');
+
+//informar para o server.js (receber arquivos no formato JSON)
+app.use(express.json());
+
+//informar a rota que está presente no API.js
+app.use('/api/users/', apiRoutes);
+
 app.listen(port, () =>{
     console.log("Servidor funcionando!");
 });
