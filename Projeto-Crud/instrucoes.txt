@@ -1,0 +1,11 @@
+Clone o repositório
+Acesse a pasta do repositório:
+	instale o framework express:
+		npm install express
+	instale a biblioteca do banco de dados:
+		npm install mysql2
+
+Crie o banco de dados (script.sql)
+Ajuste as credenciais de acesso ao banco (db.js)
+
+Rode o projeto: node server.js 
