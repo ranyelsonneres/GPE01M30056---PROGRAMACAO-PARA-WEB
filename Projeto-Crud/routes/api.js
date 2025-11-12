@@ -3,6 +3,7 @@ const router = express.Router(); //modularizar as rotas
 
 //conectar ao banco
 const db = require('../db');
+const e = require('express');
 
 //definir as rotas
 //rota = cadastrar o usuário
@@ -21,6 +22,15 @@ router.post('/', (req, res)=>{
         }
         
     )
+})
+
+//criar a rota para trazer os usuários do banco
+router.get('/', (req, res)=>{
+    //executar a instrução sql
+    db.query('SELECT * FROM users', (err, results) =>{
+        if (err) return res.status(500).send(err); 
+        res.json(results);
+    })
 })
 
 //exportar as rotas
