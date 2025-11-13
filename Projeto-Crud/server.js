@@ -20,6 +20,11 @@ app.get('/', (req, res) =>{
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+app.get('/usuarios', (req, res) =>{
+    //res.send('Front funcionando!');
+    res.sendFile(path.join(__dirname, 'public', 'usuarios.html'));
+});
+
 //linkar com o arquivo API (contém as rotas do nosso sistema)
 const apiRoutes = require('./routes/api');
 
