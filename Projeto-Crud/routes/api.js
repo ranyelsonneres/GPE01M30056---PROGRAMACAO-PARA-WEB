@@ -3,7 +3,7 @@ const router = express.Router(); //modularizar as rotas
 
 //conectar ao banco
 const db = require('../db');
-const e = require('express');
+//const e = require('express');
 
 //definir as rotas
 //rota = cadastrar o usuário
@@ -32,6 +32,36 @@ router.get('/', (req, res)=>{
         res.json(results);
     })
 })
+
+//rota para editar o usuário: PUT (UPDATE)
+router.put('/:id', (req, res) =>{
+    //extrair os dados que vem do front
+    const {nome, email} = req.body; //corpo da requisição
+    const {id} = req.params; //pegar o parâmetro (id)
+    console.log(nome, email, id);
+
+    //executar a instrução sql
+    db.query('UPDATE users SET nome = ?, email = ? WHERE id = ?', [nome, email, id], 
+    (err) =>{
+        if(err) return res.status(500).send(err);
+        res.json({id, nome, email});
+    })
+})
+
+//rota para excluir o usuário: DELETE
+router.delete('/:id', (req, res) =>{
+    //pegar o id do usuário (parametro da URL)
+    const {id} = req.params;
+
+    //executar a instrução sql
+    db.query('DELETE FROM users WHERE id = ?', [id], 
+        (err) =>{
+            if(err) return res.status(500).send(err);
+            res.sendStatus(204);
+        }
+    )
+})
+
 
 //exportar as rotas
 module.exports = router;
